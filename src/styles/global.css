@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+
+:root {
+  --blue-900: hsl(209, 23%, 22%); /*  Dark Mode Elements */
+  --blue-950: hsl(207, 26%, 17%); /* Dark Mode Background */
+  --grey-950: hsl(200, 15%, 8%); /* Light Mode Text */
+  --grey-400: hsl(0, 0%, 50%); /* Light Mode Input */
+  --grey-50: hsl(0, 0%, 99%); /* Light Mode Background */
+  --white: hsl(0, 100%, 100%); /* Dark Mode Text & Light Mode Elements */
+
+  --font-family: "Nunito Sans", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+body {
+  /* light */
+  background-color: var(--grey-50);
+}
