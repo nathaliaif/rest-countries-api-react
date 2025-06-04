@@ -27,3 +27,22 @@ nav {
   font-weight: 500;
   font-size: 0.8rem;
 }
+
+@media screen and (min-width: 1440px) {
+  nav {
+    padding: 2rem 4rem;
+  }
+
+  .nav-title {
+    font-size: 1.5rem;
+  }
+
+  .moon-icon {
+    width: 2rem;
+  }
+
+  .toggle__text {
+    font-weight: 500;
+    font-size: 1rem;
+  }
+}
