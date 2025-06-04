@@ -1,0 +1,26 @@
+/* 
+  --blue-900: hsl(209, 23%, 22%);  Dark Mode Elements 
+  --blue-950: hsl(207, 26%, 17%); Dark Mode Background
+  --grey-950: hsl(200, 15%, 8%); Light Mode Text 
+  --grey-400: hsl(0, 0%, 50%); Light Mode Input 
+  --grey-50: hsl(0, 0%, 99%); Light Mode Background
+  --white: hsl(0, 100%, 100%);  Dark Mode Text & Light Mode Elements 
+  */
+
+:root {
+  /* default color (light) */
+  --bg-color: hsl(0, 0%, 99%);
+  --text-color: hsl(200, 15%, 8%);
+  --input-color: hsl(0, 0%, 50%);
+  --elements-color: hsl(0, 100%, 100%);
+  --box-shadow: 1px 0px 15px -1px rgba(0, 0, 0, 0.15);
+
+  --font-family: "Nunito Sans", sans-serif;
+}
+
+body[theme="dark"] {
+  --bg-color: hsl(207, 26%, 17%);
+  --text-color: hsl(0, 100%, 100%);
+  --input-color: hsl(209, 23%, 22%);
+  --elements-color: hsl(209, 23%, 22%);
+}
