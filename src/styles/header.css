@@ -13,6 +13,10 @@ nav {
   -moz-box-shadow: var(--box-shadow);
 }
 
+.nav-title:hover {
+  cursor: pointer;
+}
+
 .toggle-container {
   display: flex;
   align-items: center;
@@ -20,10 +24,19 @@ nav {
   background: none;
   border: none;
   color: var(--text-color);
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .moon-icon {
   width: 1.1rem;
+}
+
+body.dark-theme .moon-icon {
+  fill: var(--text-color);
+  color: var(--elements-color);
 }
 
 .toggle__text {

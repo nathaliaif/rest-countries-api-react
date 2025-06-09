@@ -5,8 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
 
 export default function Home() {
-  const [filteredSearch, setFilteredSearch] = useState("");
+  const [display, setDisplay] = useState([]);
   const [allCountries, setAllCountries] = useState([]);
+  const [selectedRegion, setSelectedRegion] = useState("");
 
   const navigate = useNavigate();
 
@@ -19,13 +20,34 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await getData();
+      setDisplay(data);
       setAllCountries(data);
     };
 
     fetchData();
   }, []);
 
-  const sixCountries = allCountries.slice(0, 5);
+  function handleChange(value: string, type?: string): void {
+    if (type === "select") {
+      const filteredData = allCountries.filter((item) =>
+        item.region.toLowerCase().includes(value)
+      );
+      setDisplay(filteredData);
+      return;
+    }
+
+    setSelectedRegion("");
+
+    if (value === "") {
+      setDisplay(allCountries);
+      return;
+    }
+
+    const filteredData = allCountries.filter((item) =>
+      item.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setDisplay(filteredData);
+  }
 
   return (
     <div className="home-container">
@@ -36,11 +58,18 @@ export default function Home() {
             type="text"
             className="input-search"
             placeholder="Search for a country..."
+            onChange={(e) => handleChange(e.target.value)}
           />
         </div>
         <div className="select-container">
-          <select>
-            <option value="0">Filter by Region</option>
+          <select
+            value={selectedRegion}
+            onChange={(e) => {
+              setSelectedRegion(e.target.value);
+              handleChange(e.target.value, "select");
+            }}
+          >
+            <option value="">Filter by Region</option>
             <option value="africa">Africa</option>
             <option value="america">America</option>
             <option value="asia">Asia</option>
@@ -50,7 +79,7 @@ export default function Home() {
         </div>
       </div>
       <div className="countries-container">
-        {sixCountries.map((value, index) => (
+        {display.map((value, index) => (
           <div key={index} className="country-card" onClick={handleClick}>
             <img src={value.flags.png} alt={value.name} />
             <div className="card__texts">

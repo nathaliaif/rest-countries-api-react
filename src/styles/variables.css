@@ -13,7 +13,7 @@
   --text-color: hsl(200, 15%, 8%);
   --input-color: hsl(0, 0%, 50%);
   --elements-color: hsl(0, 100%, 100%);
-  --box-shadow: 1px 0px 15px -1px rgba(0, 0, 0, 0.15);
+  --box-shadow: 0px 2px 10px 1.5px rgba(0, 0, 0, 0.15);
 
   --font-family: "Nunito Sans", sans-serif;
 }
