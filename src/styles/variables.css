@@ -18,7 +18,7 @@
   --font-family: "Nunito Sans", sans-serif;
 }
 
-body[theme="dark"] {
+body.dark-theme {
   --bg-color: hsl(207, 26%, 17%);
   --text-color: hsl(0, 100%, 100%);
   --input-color: hsl(209, 23%, 22%);

@@ -1,10 +1,19 @@
 import { useEffect, useState } from "react";
-import { getData } from "../api.js";
+import { getData } from "../util/api.js";
 import "../styles/home.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
   const [filteredSearch, setFilteredSearch] = useState("");
   const [allCountries, setAllCountries] = useState([]);
+
+  const navigate = useNavigate();
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const country = e.currentTarget.value;
+    console.log(country);
+    navigate("/info", { state: country });
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,7 +35,7 @@ export default function Home() {
       />
       <div className="countries-container">
         {sixCountries.map((value, index) => (
-          <div key={index} className="country-card">
+          <div key={index} className="country-card" onClick={handleClick}>
             <img src={value.flags.png} alt={value.name} />
             <div className="card__texts">
               <h3 className="card__title">{value.name}</h3>

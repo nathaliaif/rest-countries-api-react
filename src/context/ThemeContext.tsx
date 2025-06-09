@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 
 type ThemeContextType = {
   isDarkTheme: boolean;
@@ -19,6 +25,10 @@ export function useDarkTheme() {
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
+
+  useEffect(() => {
+    document.body.classList.toggle("dark-theme", isDarkTheme);
+  }, [isDarkTheme]);
 
   return (
     <ThemeContext.Provider value={{ isDarkTheme, setIsDarkTheme }}>
