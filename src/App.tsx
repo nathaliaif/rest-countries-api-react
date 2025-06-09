@@ -1,6 +1,6 @@
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
-import Info from "./pages/info";
+import Details from "./pages/details";
 import Layout from "./Layout";
 import { InfoProvider } from "./context/InfoContext";
 import { ThemeProvider } from "./context/ThemeContext";
@@ -14,7 +14,7 @@ function App() {
             <Routes>
               <Route element={<Layout />}>
                 <Route path="/" element={<Home />} />
-                <Route path="/info" element={<Info />} />
+                <Route path="/details" element={<Details />} />
               </Route>
             </Routes>
           </Router>

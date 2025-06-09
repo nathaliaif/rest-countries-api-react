@@ -3,18 +3,18 @@ import { getData } from "../util/api.js";
 import "../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
+import { useInfo } from "../context/InfoContext.js";
 
 export default function Home() {
   const [display, setDisplay] = useState([]);
   const [allCountries, setAllCountries] = useState([]);
   const [selectedRegion, setSelectedRegion] = useState("");
+  const { info, setInfo } = useInfo();
 
   const navigate = useNavigate();
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const country = e.currentTarget.value;
-    console.log(country);
-    navigate("/info", { state: country });
+  const handleClick = (country: []) => {
+    navigate("/details", { state: country });
   };
 
   useEffect(() => {
@@ -80,7 +80,11 @@ export default function Home() {
       </div>
       <div className="countries-container">
         {display.map((value, index) => (
-          <div key={index} className="country-card" onClick={handleClick}>
+          <div
+            key={index}
+            className="country-card"
+            onClick={() => handleClick(value)}
+          >
             <img src={value.flags.png} alt={value.name} />
             <div className="card__texts">
               <h3 className="card__title">{value.name}</h3>
