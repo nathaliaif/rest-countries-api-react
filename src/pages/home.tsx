@@ -29,13 +29,25 @@ export default function Home() {
 
   return (
     <div className="home-container">
-      <div className="input-search-container">
-        <Search className="search-icon" />
-        <input
-          type="text"
-          className="input-search"
-          placeholder="Search for a country..."
-        />
+      <div className="filtered-searches-container">
+        <div className="input-search-container">
+          <Search className="search-icon" />
+          <input
+            type="text"
+            className="input-search"
+            placeholder="Search for a country..."
+          />
+        </div>
+        <div className="select-container">
+          <select>
+            <option value="0">Filter by Region</option>
+            <option value="africa">Africa</option>
+            <option value="america">America</option>
+            <option value="asia">Asia</option>
+            <option value="europe">Europe</option>
+            <option value="oceania">Oceania</option>
+          </select>
+        </div>
       </div>
       <div className="countries-container">
         {sixCountries.map((value, index) => (
