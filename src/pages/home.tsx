@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getData } from "../util/api.js";
 import "../styles/home.css";
 import { useNavigate } from "react-router-dom";
+import { Search } from "lucide-react";
 
 export default function Home() {
   const [filteredSearch, setFilteredSearch] = useState("");
@@ -28,11 +29,14 @@ export default function Home() {
 
   return (
     <div className="home-container">
-      <input
-        type="text"
-        className="input-search"
-        placeholder="Search for a country"
-      />
+      <div className="input-search-container">
+        <Search className="search-icon" />
+        <input
+          type="text"
+          className="input-search"
+          placeholder="Search for a country..."
+        />
+      </div>
       <div className="countries-container">
         {sixCountries.map((value, index) => (
           <div key={index} className="country-card" onClick={handleClick}>

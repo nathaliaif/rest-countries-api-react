@@ -1,9 +1,45 @@
+.home-container {
+  padding: 1.5rem 1rem 1rem 1rem;
+}
+
+.input-search-container {
+  display: flex;
+  align-items: center;
+  column-gap: 1rem;
+  padding: 0.5rem 1rem 0.5rem 1.5rem;
+  border-radius: 7px;
+  background: var(--elements-color);
+  box-shadow: var(--box-shadow);
+}
+
+.search-icon {
+  color: var(--text-color);
+}
+
+.input-search {
+  padding: 0.5rem 0.2rem;
+  width: 100%;
+  background: var(--elements-color);
+  color: var(--text-color);
+  border: none;
+
+  &::placeholder {
+    color: var(--text-color);
+    opacity: 0.5;
+  }
+
+  &:focus {
+    border: none;
+    outline: none;
+  }
+}
+
 .countries-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 1rem 2rem 4rem 2rem;
+  padding: 4rem 1rem 4rem 1rem;
   row-gap: 3rem;
 }
 
@@ -12,6 +48,8 @@
   overflow: hidden;
   width: 90%;
   box-shadow: var(--box-shadow);
+  background: var(--elements-color);
+  color: var(--text-color);
 
   img {
     width: 100%;

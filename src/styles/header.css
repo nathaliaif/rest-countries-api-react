@@ -19,6 +19,7 @@ nav {
   column-gap: 0.5rem;
   background: none;
   border: none;
+  color: var(--text-color);
 }
 
 .moon-icon {
