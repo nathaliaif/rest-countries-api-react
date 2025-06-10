@@ -62,7 +62,7 @@ export default function Details() {
               </p>
               <p className="info__text">
                 <span className="info__title">Population: </span>
-                {country.population}
+                {country.population.toLocaleString("en-US")}
               </p>
               <p className="info__text">
                 <span className="info__title">Region: </span>

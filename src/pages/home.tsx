@@ -91,7 +91,7 @@ export default function Home() {
               <div className="card__infos">
                 <p>
                   <span className="card__info-title">Population: </span>
-                  {value.population}
+                  {value.population.toLocaleString("en-US")}
                 </p>
                 <p>
                   <span className="card__info-title">Region: </span>
