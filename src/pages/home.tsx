@@ -3,50 +3,75 @@ import { getData } from "../util/api.js";
 import "../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
-import { useInfo } from "../context/InfoContext.js";
+import Pagination from "../components/Pagination.js";
 
 export default function Home() {
   const [display, setDisplay] = useState([]);
-  const [allCountries, setAllCountries] = useState([]);
+  const [filteredCountries, setFilteredCountries] = useState([]);
+  const [totalCountries, setTotalCountries] = useState([]);
   const [selectedRegion, setSelectedRegion] = useState("");
-  const { info, setInfo } = useInfo();
+  const [loading, setLoading] = useState(false);
 
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+
+  // Navigate
   const navigate = useNavigate();
 
   const handleClick = (country: []) => {
     navigate("/details", { state: country });
   };
 
+  // Fetch all countries from api
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const data = await getData();
-      setDisplay(data);
-      setAllCountries(data);
+      setTotalCountries(data);
+      setFilteredCountries(data);
+      handlePageChange(1, data);
+
+      // Loading animation
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     };
 
     fetchData();
   }, []);
 
+  // Input and select filtering logic
   function handleChange(value: string, type?: string): void {
+    let filteredData;
+
     if (type === "select") {
-      const filteredData = allCountries.filter((item) =>
+      filteredData = allCountries.filter((item) =>
         item.region.toLowerCase().includes(value)
       );
-      setDisplay(filteredData);
-      return;
+      setSelectedRegion(value);
+    } else {
+      setSelectedRegion("");
+      filteredData =
+        value === ""
+          ? totalCountries
+          : totalCountries.filter((item) =>
+              item.name.toLowerCase().includes(value.toLowerCase())
+            );
     }
 
-    setSelectedRegion("");
+    setFilteredCountries(filteredData);
+    handlePageChange(1, filteredData); // reset to page 1 and paginate new filtered data
+  }
 
-    if (value === "") {
-      setDisplay(allCountries);
-      return;
-    }
+  // Pagination
+  function handlePageChange(pageNumber: number, data = filteredCountries) {
+    const indexOfLastItem = pageNumber * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentSlice = data.slice(indexOfFirstItem, indexOfLastItem);
 
-    const filteredData = allCountries.filter((item) =>
-      item.name.toLowerCase().includes(value.toLowerCase())
-    );
-    setDisplay(filteredData);
+    setDisplay(currentSlice);
+    setCurrentPage(pageNumber);
   }
 
   return (
@@ -79,33 +104,43 @@ export default function Home() {
         </div>
       </div>
       <div className="countries-container">
-        {display.map((value, index) => (
-          <div
-            key={index}
-            className="country-card"
-            onClick={() => handleClick(value)}
-          >
-            <img src={value.flags.png} alt={value.name} />
-            <div className="card__texts">
-              <h3 className="card__title">{value.name}</h3>
-              <div className="card__infos">
-                <p>
-                  <span className="card__info-title">Population: </span>
-                  {value.population.toLocaleString("en-US")}
-                </p>
-                <p>
-                  <span className="card__info-title">Region: </span>
-                  {value.region}
-                </p>
-                <p>
-                  <span className="card__info-title">Capital: </span>
-                  {value.capital}
-                </p>
+        {loading ? (
+          <p>Loading...</p>
+        ) : (
+          display.map((value, index) => (
+            <div
+              key={index}
+              className="country-card"
+              onClick={() => handleClick(value)}
+            >
+              <img src={value.flags.png} alt={value.name} />
+              <div className="card__texts">
+                <h3 className="card__title">{value.name}</h3>
+                <div className="card__infos">
+                  <p>
+                    <span className="card__info-title">Population: </span>
+                    {value.population.toLocaleString("en-US")}
+                  </p>
+                  <p>
+                    <span className="card__info-title">Region: </span>
+                    {value.region}
+                  </p>
+                  <p>
+                    <span className="card__info-title">Capital: </span>
+                    {value.capital}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        totalItems={filteredCountries.length}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
     </div>
   );
 }

@@ -12,6 +12,7 @@ export default function Details() {
   const location = useLocation();
   const country = location.state;
 
+  // Fetch all countries
   useEffect(() => {
     const fetchData = async () => {
       const data = await getData();
@@ -21,10 +22,11 @@ export default function Details() {
     fetchData();
   }, []);
 
+  //Get all neighboring countries
   useEffect(() => {
     if (!country || allCountries.length === 0) return;
 
-    //Get all details from bordering countries
+    //Filter all neighboring countries
     const arrBorderCountries = allCountries.filter((value) =>
       country.borders.includes(value.alpha3Code)
     );
