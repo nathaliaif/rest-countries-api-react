@@ -46,7 +46,7 @@ export default function Home() {
     let filteredData;
 
     if (type === "select") {
-      filteredData = allCountries.filter((item) =>
+      filteredData = totalCountries.filter((item) =>
         item.region.toLowerCase().includes(value)
       );
       setSelectedRegion(value);
