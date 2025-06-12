@@ -1,8 +1,8 @@
-import { Country } from "../types/country";
+import type { Country } from "../types/country";
 
-export default function CountryCard({ index: number, value: Country }) {
+export default function CountryCard({ value }: { value: Country }) {
   return (
-    <div key={index} className="country-card">
+    <div className="country-card">
       <img src={value.flags.png} alt={value.name} />
       <div className="card__texts">
         <h3 className="card__title">{value.name}</h3>

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { getData } from "../util/api.js";
+import { getData } from "../util/api";
 import "../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
 import Pagination from "../components/Pagination.js";
-import type { Country } from "../types/country.js";
+import type { Country } from "../types/country";
 
 export default function Home() {
   const [display, setDisplay] = useState<Country[]>([]);
@@ -15,7 +15,7 @@ export default function Home() {
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 8;
+  const itemsPerPage: number = 8;
 
   // Navigate
   const navigate = useNavigate();

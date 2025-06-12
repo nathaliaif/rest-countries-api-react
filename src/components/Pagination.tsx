@@ -20,10 +20,10 @@ const Pagination = ({
   currentPage,
   onPageChange,
 }: PaginationType) => {
-  const pageNumbers = [];
+  const pageNumbers: number[] = [];
 
   // Get the total amount of pages necessary
-  for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
+  for (let i: number = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
     pageNumbers.push(i);
   }
 
@@ -33,14 +33,14 @@ const Pagination = ({
 
   const paginate = (
     pageNumber: number,
-    e: React.MouseEvent<HTMLAnchorElement>
+    e: React.MouseEvent<HTMLButtonElement>
   ) => {
     e.preventDefault();
     onPageChange(pageNumber);
   };
 
   // Handles from on the back and next arrows
-  function handleArrowClick(id) {
+  function handleArrowClick(id: string) {
     // Logic for arrow back
     if (id === "arrow-back" && currentPage > 1) {
       onPageChange(currentPage - 1);
