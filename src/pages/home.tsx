@@ -4,11 +4,12 @@ import "../styles/home.css";
 import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
 import Pagination from "../components/Pagination.js";
+import type { Country } from "../types/country.js";
 
 export default function Home() {
-  const [display, setDisplay] = useState([]);
-  const [filteredCountries, setFilteredCountries] = useState([]);
-  const [totalCountries, setTotalCountries] = useState([]);
+  const [display, setDisplay] = useState<Country[]>([]);
+  const [filteredCountries, setFilteredCountries] = useState<Country[]>([]);
+  const [totalCountries, setTotalCountries] = useState<Country[]>([]);
   const [selectedRegion, setSelectedRegion] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -19,7 +20,7 @@ export default function Home() {
   // Navigate
   const navigate = useNavigate();
 
-  const handleClick = (country: []) => {
+  const handleClick = (country: Country) => {
     navigate("/details", { state: country });
   };
 
@@ -40,6 +41,11 @@ export default function Home() {
 
     fetchData();
   }, []);
+
+  // Send page back to top when changes occur
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, [display]);
 
   // Input and select filtering logic
   function handleChange(value: string, type?: string): void {
@@ -107,7 +113,7 @@ export default function Home() {
         {loading ? (
           <p>Loading...</p>
         ) : (
-          display.map((value, index) => (
+          display.map((value: Country, index) => (
             <div
               key={index}
               className="country-card"

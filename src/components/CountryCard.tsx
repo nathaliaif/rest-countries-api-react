@@ -1,4 +1,6 @@
-export default function CountryCard({ index, value }) {
+import { Country } from "../types/country";
+
+export default function CountryCard({ index: number, value: Country }) {
   return (
     <div key={index} className="country-card">
       <img src={value.flags.png} alt={value.name} />

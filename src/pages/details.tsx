@@ -3,10 +3,11 @@ import { getData } from "../util/api.js";
 import { MoveLeft } from "lucide-react";
 import "../styles/details.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import type { Country } from "../types/country.js";
 
 export default function Details() {
-  const [allCountries, setAllCountries] = useState([]);
-  const [borderCountries, setBorderCountries] = useState([]);
+  const [allCountries, setAllCountries] = useState<Country[]>([]);
+  const [borderCountries, setBorderCountries] = useState<Country[]>([]);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -28,7 +29,7 @@ export default function Details() {
 
     //Filter all neighboring countries
     const arrBorderCountries = allCountries.filter((value) =>
-      country.borders.includes(value.alpha3Code)
+      country.borders?.includes(value.alpha3Code)
     );
     setBorderCountries(arrBorderCountries);
   }, [allCountries, country]);
@@ -39,7 +40,7 @@ export default function Details() {
 
   function getInfo(key: "currencies" | "languages"): string {
     const info = country[key];
-    return info.map((item) => item.name).join(", ");
+    return info.map((item: Country) => item.name).join(", ");
   }
 
   return (
