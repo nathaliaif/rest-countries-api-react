@@ -31,7 +31,7 @@
 
   &:hover {
     background: var(--input-color);
-    color: var(--bg-color);
+    color: white;
     cursor: pointer;
   }
 }
@@ -55,7 +55,7 @@
 
   &:hover {
     background: var(--input-color);
-    color: var(--text-color);
+    color: white;
     cursor: pointer;
   }
 }
