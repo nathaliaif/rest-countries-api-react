@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Search } from "lucide-react";
 import Pagination from "../components/Pagination.js";
 import type { Country } from "../types/country";
+import LoadingCard from "../components/LoadingCard.js";
 
 export default function Home() {
   const [display, setDisplay] = useState<Country[]>([]);
@@ -110,36 +111,36 @@ export default function Home() {
         </div>
       </div>
       <div className="countries-container">
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
-          display.map((value: Country, index) => (
-            <div
-              key={index}
-              className="country-card"
-              onClick={() => handleClick(value)}
-            >
-              <img src={value.flags.png} alt={value.name} />
-              <div className="card__texts">
-                <h3 className="card__title">{value.name}</h3>
-                <div className="card__infos">
-                  <p>
-                    <span className="card__info-title">Population: </span>
-                    {value.population.toLocaleString("en-US")}
-                  </p>
-                  <p>
-                    <span className="card__info-title">Region: </span>
-                    {value.region}
-                  </p>
-                  <p>
-                    <span className="card__info-title">Capital: </span>
-                    {value.capital}
-                  </p>
+        {loading
+          ? Array.from({ length: itemsPerPage }).map((_, i) => (
+              <LoadingCard key={i} />
+            ))
+          : display.map((value: Country, index) => (
+              <div
+                key={index}
+                className="country-card"
+                onClick={() => handleClick(value)}
+              >
+                <img src={value.flags.png} alt={value.name} />
+                <div className="card__texts">
+                  <h3 className="card__title">{value.name}</h3>
+                  <div className="card__infos">
+                    <p>
+                      <span className="card__info-title">Population: </span>
+                      {value.population.toLocaleString("en-US")}
+                    </p>
+                    <p>
+                      <span className="card__info-title">Region: </span>
+                      {value.region}
+                    </p>
+                    <p>
+                      <span className="card__info-title">Capital: </span>
+                      {value.capital}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
-        )}
+            ))}
       </div>
       <Pagination
         itemsPerPage={itemsPerPage}
