@@ -51,7 +51,7 @@ export default function Details() {
       </button>
       <div className="details-container">
         <img
-          src={country.flags.png}
+          src={country.flags.svg}
           alt={country.name}
           className="country-flag"
         />
