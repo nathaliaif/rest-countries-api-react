@@ -2,7 +2,7 @@ export type Country = {
   name: string;
   topLevelDomain: [string];
   alpha3Code: string;
-  capital: string;
+  capital?: string;
   subregion: string;
   region: string;
   population: number;
@@ -12,7 +12,7 @@ export type Country = {
     svg: string;
     png: string;
   };
-  currencies: {
+  currencies?: {
     name: string;
   };
   languages: [

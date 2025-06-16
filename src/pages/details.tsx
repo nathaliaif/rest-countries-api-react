@@ -40,7 +40,12 @@ export default function Details() {
 
   function getInfo(key: "currencies" | "languages"): string {
     const info = country[key];
-    return info.map((item: Country) => item.name).join(", ");
+
+    if (info) {
+      return info.map((item: Country) => item.name).join(", ");
+    } else {
+      return "";
+    }
   }
 
   return (
@@ -77,7 +82,7 @@ export default function Details() {
               </p>
               <p className="info__text">
                 <span className="info__title">Capital: </span>
-                {country.capital}
+                {country.capital ? country.capital : ""}
               </p>
             </div>
             <div className="info-text-container">
