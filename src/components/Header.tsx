@@ -20,7 +20,9 @@ export default function Header() {
         </div>
         <button className="toggle-container" onClick={handleClick}>
           <Moon className="moon-icon" />
-          <span className="toggle__text">Dark Mode</span>
+          <span className="toggle__text">
+            {isDarkTheme ? "Light" : "Dark"} Mode
+          </span>
         </button>
       </nav>
     </>
