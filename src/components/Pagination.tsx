@@ -5,6 +5,8 @@ import {
   ChevronsRight,
 } from "lucide-react";
 import "../styles/pagination.css";
+import { useEffect, useState } from "react";
+import useWindowSize from "../hooks/useWindowSize";
 
 type PaginationType = {
   itemsPerPage: number;
@@ -21,15 +23,30 @@ const Pagination = ({
   onPageChange,
 }: PaginationType) => {
   const pageNumbers: number[] = [];
+  const [pagesAhead, setPagesAhead] = useState(0);
+  const [pagesBefore, setPagesBefore] = useState(0);
+  const [totalPagesShown, setTotalPagesShown] = useState(7);
 
   // Get the total amount of pages necessary
   for (let i: number = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
     pageNumbers.push(i);
   }
 
+  //Define the amount of page numbers being shown in the component
   const lastPage = pageNumbers.length;
-  const threeAhead = currentPage + 3;
-  const threeBefore = currentPage - 3;
+  const { width } = useWindowSize(); // Gets window width
+
+  useEffect(() => {
+    if (width < 613) {
+      setTotalPagesShown(3);
+      setPagesAhead(currentPage + 1);
+      setPagesBefore(currentPage - 1);
+    } else {
+      setTotalPagesShown(7);
+      setPagesAhead(currentPage + 3);
+      setPagesBefore(currentPage - 3);
+    }
+  }, [currentPage, width]);
 
   const paginate = (
     pageNumber: number,
@@ -89,15 +106,18 @@ const Pagination = ({
         </li>
         {pageNumbers
           .filter((number) => {
-            if (currentPage < 4) {
-              // Show first 7
-              return number <= 7;
-            } else if (currentPage > lastPage - 3) {
-              // Show last 7
-              return number >= lastPage - 6;
+            if (currentPage < Math.floor(totalPagesShown / 2 + 1)) {
+              // Show first pages
+              return number <= totalPagesShown;
+            } else if (
+              currentPage >
+              lastPage - Math.floor(totalPagesShown / 2 - 1)
+            ) {
+              // Show last pages
+              return number >= lastPage - (totalPagesShown - 1);
             } else {
-              // Show currentPage centered with 3 before and 3 after
-              return number >= threeBefore && number <= threeAhead;
+              // Show currentPage in the middle of the other pages
+              return number >= pagesBefore && number <= pagesAhead;
             }
           })
           .map((number) => (
