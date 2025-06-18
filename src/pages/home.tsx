@@ -116,7 +116,7 @@ export default function Home() {
               <LoadingCard key={i} />
             ))
           : display.map((value: Country, index) => (
-              <div
+              <button
                 key={index}
                 className="country-card"
                 onClick={() => handleClick(value)}
@@ -139,7 +139,7 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </button>
             ))}
       </div>
       <Pagination
