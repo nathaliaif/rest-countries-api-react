@@ -63,42 +63,42 @@ export default function Details() {
         <div>
           <h2>{country.name}</h2>
           <div className="info-text">
-            <div className="info-text-container">
-              <p className="info__text">
+            <ul className="info-text-container">
+              <li className="info__text">
                 <span className="info__title">Native Name: </span>
                 {country.nativeName}
-              </p>
-              <p className="info__text">
+              </li>
+              <li className="info__text">
                 <span className="info__title">Population: </span>
                 {country.population.toLocaleString("en-US")}
-              </p>
-              <p className="info__text">
+              </li>
+              <li className="info__text">
                 <span className="info__title">Region: </span>
                 {country.region}
-              </p>
-              <p className="info__text">
+              </li>
+              <li className="info__text">
                 <span className="info__title">Sub Region: </span>
                 {country.subregion}
-              </p>
-              <p className="info__text">
+              </li>
+              <li className="info__text">
                 <span className="info__title">Capital: </span>
                 {country.capital ? country.capital : ""}
-              </p>
-            </div>
-            <div className="info-text-container">
-              <p className="info__text">
+              </li>
+            </ul>
+            <ul className="info-text-container">
+              <li className="info__text">
                 <span className="info__title">Top Level Domain: </span>
                 {country.topLevelDomain}
-              </p>
-              <p className="info__text">
+              </li>
+              <li className="info__text">
                 <span className="info__title">Currencies: </span>
                 {getInfo("currencies")}
-              </p>
-              <p className="info__text">
+              </li>
+              <li className="info__text">
                 <span className="info__title">Languages: </span>
                 {getInfo("languages")}
-              </p>
-            </div>
+              </li>
+            </ul>
           </div>
           <div className="info-text-container">
             <h3 className="info__title-border-countries">Border Countries:</h3>
