@@ -124,20 +124,20 @@ export default function Home() {
                 <img src={value.flags.png} alt={value.name} />
                 <div className="card__texts">
                   <h3 className="card__title">{value.name}</h3>
-                  <div className="card__infos">
-                    <p>
+                  <ul className="card__infos">
+                    <li>
                       <span className="card__info-title">Population: </span>
                       {value.population.toLocaleString("en-US")}
-                    </p>
-                    <p>
+                    </li>
+                    <li>
                       <span className="card__info-title">Region: </span>
                       {value.region}
-                    </p>
-                    <p>
+                    </li>
+                    <li>
                       <span className="card__info-title">Capital: </span>
                       {value.capital}
-                    </p>
-                  </div>
+                    </li>
+                  </ul>
                 </div>
               </button>
             ))}
