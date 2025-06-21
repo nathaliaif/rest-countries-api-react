@@ -102,21 +102,23 @@ export default function Details() {
           </div>
           <div className="info-text-container">
             <h3 className="info__title-border-countries">Border Countries:</h3>
-            <div className="border-countries-container">
+            <ul className="border-countries-container">
               {borderCountries.map((country, index) => {
                 return (
-                  <div
-                    className="border-country-card"
-                    key={index}
-                    onClick={() => {
-                      navigate("/details", { state: country });
-                    }}
-                  >
-                    {country.name}
-                  </div>
+                  <li>
+                    <button
+                      className="border-country-card"
+                      key={index}
+                      onClick={() => {
+                        navigate("/details", { state: country });
+                      }}
+                    >
+                      {country.name}
+                    </button>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </div>
         </div>
       </div>

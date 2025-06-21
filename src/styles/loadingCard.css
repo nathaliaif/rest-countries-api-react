@@ -1,7 +1,7 @@
 .loading-card {
   border-radius: 10px;
   overflow: hidden;
-  width: 90%;
+  width: 16rem;
   height: 400px;
   box-shadow: var(--box-shadow);
   background: var(--elements-color);
@@ -43,7 +43,4 @@
 }
 
 @media screen and (min-width: 700px) {
-  .loading-card {
-    width: 100%;
-  }
 }
