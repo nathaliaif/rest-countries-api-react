@@ -51,12 +51,17 @@
   row-gap: 1rem;
   column-gap: 0.5rem;
   padding: 1rem 0;
+  list-style: none;
+  border: none;
 }
 
 .border-country-card {
   padding: 0.5rem 1.5rem;
   background: var(--elements-color);
   box-shadow: var(--box-shadow);
+  font-family: var(--font-family);
+  font-size: 0.9rem;
+  border: none;
   transition: box-shadow 0.2s ease-out;
 
   &:hover {
