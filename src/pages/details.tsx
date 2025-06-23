@@ -105,10 +105,9 @@ export default function Details() {
             <ul className="border-countries-container">
               {borderCountries.map((country, index) => {
                 return (
-                  <li>
+                  <li key={index}>
                     <button
                       className="border-country-card"
-                      key={index}
                       onClick={() => {
                         navigate("/details", { state: country });
                       }}
