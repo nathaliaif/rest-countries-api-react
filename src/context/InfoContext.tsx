@@ -1,8 +1,14 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 
+type InfoState = {
+  input: string;
+  select: string;
+  currentPage: number;
+};
+
 type InfoContextType = {
-  info: string[];
-  setInfo: React.Dispatch<React.SetStateAction<string[]>>;
+  info: InfoState;
+  setInfo: React.Dispatch<React.SetStateAction<InfoState>>;
 };
 
 export const InfoContext = createContext<InfoContextType | undefined>(
@@ -18,7 +24,11 @@ export function useInfo() {
 }
 
 export function InfoProvider({ children }: { children: ReactNode }) {
-  const [info, setInfo] = useState<string[]>([]);
+  const [info, setInfo] = useState<InfoState>({
+    input: "",
+    select: "",
+    currentPage: 0,
+  });
 
   return (
     <InfoContext.Provider value={{ info, setInfo }}>
