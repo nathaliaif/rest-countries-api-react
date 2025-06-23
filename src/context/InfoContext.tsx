@@ -1,9 +1,11 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
+import type { Country } from "../types/country";
 
 type InfoState = {
+  filter: Country[];
+  currentPage: number;
   input: string;
   select: string;
-  currentPage: number;
 };
 
 type InfoContextType = {
@@ -25,9 +27,10 @@ export function useInfo() {
 
 export function InfoProvider({ children }: { children: ReactNode }) {
   const [info, setInfo] = useState<InfoState>({
+    filter: [],
+    currentPage: 1,
     input: "",
     select: "",
-    currentPage: 0,
   });
 
   return (

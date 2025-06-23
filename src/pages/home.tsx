@@ -6,13 +6,16 @@ import { Search } from "lucide-react";
 import Pagination from "../components/Pagination.js";
 import type { Country } from "../types/country";
 import LoadingCard from "../components/LoadingCard.js";
+import { useInfo } from "../context/InfoContext.js";
 
 export default function Home() {
   const [display, setDisplay] = useState<Country[]>([]);
   const [filteredCountries, setFilteredCountries] = useState<Country[]>([]);
   const [totalCountries, setTotalCountries] = useState<Country[]>([]);
   const [selectedRegion, setSelectedRegion] = useState("");
+  const [inputSearch, setInputSearch] = useState("");
   const [loading, setLoading] = useState(false);
+  const { info, setInfo } = useInfo();
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -31,8 +34,18 @@ export default function Home() {
       setLoading(true);
       const data = await getData();
       setTotalCountries(data);
-      setFilteredCountries(data);
-      handlePageChange(1, data);
+
+      console.log(info);
+
+      if (info.filter.length === 0) {
+        setFilteredCountries(data);
+        handlePageChange(info.currentPage, data);
+      } else {
+        setFilteredCountries(info.filter);
+        handlePageChange(info.currentPage, info.filter);
+        setSelectedRegion(info.select);
+        setInputSearch(info.input);
+      }
 
       // Loading animation
       setTimeout(() => {
@@ -53,18 +66,34 @@ export default function Home() {
     let filteredData;
 
     if (type === "select") {
+      // Logic for select filter
       filteredData = totalCountries.filter((item) =>
         item.region.toLowerCase().includes(value)
       );
       setSelectedRegion(value);
+
+      // Adds the selected Region to InfoContext
+      setInfo((prev) => ({
+        ...prev,
+        select: value,
+      }));
     } else {
+      // Logic for input filter
       setSelectedRegion("");
+      setInputSearch(value);
       filteredData =
         value === ""
           ? totalCountries
           : totalCountries.filter((item) =>
               item.name.toLowerCase().includes(value.toLowerCase())
             );
+
+      // Adds the text being typed in the input to InfoContext
+      setInfo((prev) => ({
+        ...prev,
+        input: value,
+        select: "",
+      }));
     }
 
     setFilteredCountries(filteredData);
@@ -79,6 +108,12 @@ export default function Home() {
 
     setDisplay(currentSlice);
     setCurrentPage(pageNumber);
+
+    setInfo((prev) => ({
+      ...prev,
+      filter: data,
+      currentPage: pageNumber,
+    }));
   }
 
   return (
@@ -91,6 +126,7 @@ export default function Home() {
             className="input-search"
             placeholder="Search for a country..."
             onChange={(e) => handleChange(e.target.value)}
+            value={inputSearch}
           />
         </div>
         <div className="select-container">
