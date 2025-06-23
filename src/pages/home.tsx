@@ -10,7 +10,6 @@ import { useInfo } from "../context/InfoContext.js";
 
 export default function Home() {
   const [display, setDisplay] = useState<Country[]>([]);
-  const [filteredCountries, setFilteredCountries] = useState<Country[]>([]);
   const [totalCountries, setTotalCountries] = useState<Country[]>([]);
   const [selectedRegion, setSelectedRegion] = useState("");
   const [inputSearch, setInputSearch] = useState("");
@@ -36,11 +35,10 @@ export default function Home() {
       setTotalCountries(data);
 
       if (info.filter.length === 0) {
-        setFilteredCountries(data);
+        setInfo((prev) => ({ ...prev, filter: data }));
         handlePageChange(info.currentPage, data);
       } else {
         // If user used any kind of filters, returns where it was before clicking in a country
-        setFilteredCountries(info.filter);
         handlePageChange(info.currentPage, info.filter);
         setSelectedRegion(info.select);
         setInputSearch(info.input);
@@ -62,11 +60,9 @@ export default function Home() {
 
   // Input and select filtering logic
   function handleChange(value: string, type?: string): void {
-    let filteredData;
-
     if (type === "select") {
       // Logic for select filter
-      filteredData = totalCountries.filter((item) =>
+      info.filter = totalCountries.filter((item) =>
         item.region.toLowerCase().includes(value)
       );
       setSelectedRegion(value);
@@ -82,7 +78,7 @@ export default function Home() {
       // Logic for input filter
       setSelectedRegion("");
       setInputSearch(value);
-      filteredData =
+      info.filter =
         value === ""
           ? totalCountries
           : totalCountries.filter((item) =>
@@ -97,12 +93,11 @@ export default function Home() {
       }));
     }
 
-    setFilteredCountries(filteredData);
-    handlePageChange(1, filteredData); // reset to page 1 and paginate new filtered data
+    handlePageChange(1, info.filter); // reset to page 1 and paginate new filtered data
   }
 
   // Pagination
-  function handlePageChange(pageNumber: number, data = filteredCountries) {
+  function handlePageChange(pageNumber: number, data = info.filter) {
     const indexOfLastItem = pageNumber * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentSlice = data.slice(indexOfFirstItem, indexOfLastItem);
@@ -181,7 +176,7 @@ export default function Home() {
       </div>
       <Pagination
         itemsPerPage={itemsPerPage}
-        totalItems={filteredCountries.length}
+        totalItems={info.filter.length}
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />
