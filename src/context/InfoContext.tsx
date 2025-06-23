@@ -1,8 +1,8 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 
 type InfoContextType = {
-  info: string;
-  setInfo: React.Dispatch<React.SetStateAction<string>>;
+  info: string[];
+  setInfo: React.Dispatch<React.SetStateAction<string[]>>;
 };
 
 export const InfoContext = createContext<InfoContextType | undefined>(
@@ -18,7 +18,7 @@ export function useInfo() {
 }
 
 export function InfoProvider({ children }: { children: ReactNode }) {
-  const [info, setInfo] = useState("");
+  const [info, setInfo] = useState<string[]>([]);
 
   return (
     <InfoContext.Provider value={{ info, setInfo }}>
