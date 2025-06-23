@@ -35,12 +35,11 @@ export default function Home() {
       const data = await getData();
       setTotalCountries(data);
 
-      console.log(info);
-
       if (info.filter.length === 0) {
         setFilteredCountries(data);
         handlePageChange(info.currentPage, data);
       } else {
+        // If user used any kind of filters, returns where it was before clicking in a country
         setFilteredCountries(info.filter);
         handlePageChange(info.currentPage, info.filter);
         setSelectedRegion(info.select);
@@ -71,10 +70,12 @@ export default function Home() {
         item.region.toLowerCase().includes(value)
       );
       setSelectedRegion(value);
+      setInputSearch("");
 
       // Adds the selected Region to InfoContext
       setInfo((prev) => ({
         ...prev,
+        input: "",
         select: value,
       }));
     } else {
