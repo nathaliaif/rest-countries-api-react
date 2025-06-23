@@ -83,7 +83,7 @@ export default function Home() {
 
   return (
     <div className="home-container">
-      <div className="filtered-searches-container">
+      <nav className="filtered-searches-container">
         <div className="input-search-container">
           <Search className="search-icon" />
           <input
@@ -109,7 +109,7 @@ export default function Home() {
             <option value="oceania">Oceania</option>
           </select>
         </div>
-      </div>
+      </nav>
       <div className="countries-container">
         {loading
           ? Array.from({ length: itemsPerPage }).map((_, i) => (
