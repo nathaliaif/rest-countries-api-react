@@ -17,6 +17,10 @@ nav {
   cursor: pointer;
 }
 
+.nav-title {
+  font-size: 1rem;
+}
+
 .toggle-container {
   display: flex;
   align-items: center;
@@ -42,6 +46,12 @@ body.dark-theme .moon-icon {
 .toggle__text {
   font-weight: 500;
   font-size: 0.8rem;
+}
+
+@media screen and (min-width: 600px) {
+  .nav-title {
+    font-size: 1.3rem;
+  }
 }
 
 @media screen and (min-width: 1440px) {
