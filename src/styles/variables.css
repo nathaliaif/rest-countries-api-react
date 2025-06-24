@@ -14,6 +14,12 @@
   --input-color: hsl(0, 0%, 50%);
   --elements-color: hsl(0, 100%, 100%);
   --box-shadow: 0px 2px 10px 1.5px rgba(0, 0, 0, 0.15);
+  --loading-gradient: linear-gradient(
+    110deg,
+    #ececec 8%,
+    #f5f5f5 18%,
+    #ececec 33%
+  );
 
   --font-family: "Nunito Sans", sans-serif;
 }
@@ -23,4 +29,10 @@ body.dark-theme {
   --text-color: hsl(0, 100%, 100%);
   --input-color: hsl(209, 23%, 22%);
   --elements-color: hsl(209, 23%, 22%);
+  --loading-gradient: linear-gradient(
+    110deg,
+    #3a4652 8%,
+    #49545f 18%,
+    #3a4652 33%
+  );
 }
