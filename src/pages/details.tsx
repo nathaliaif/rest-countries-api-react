@@ -44,7 +44,7 @@ export default function Details() {
     if (info) {
       return info.map((item: Country) => item.name).join(", ");
     } else {
-      return "";
+      return "-";
     }
   }
 
@@ -82,7 +82,7 @@ export default function Details() {
               </li>
               <li className="info__text">
                 <span className="info__title">Capital: </span>
-                {country.capital ? country.capital : "-"}
+                {country.capital ?? "-"}
               </li>
             </ul>
             <ul className="info-text-container">
