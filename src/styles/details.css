@@ -60,6 +60,7 @@
   background: var(--elements-color);
   box-shadow: var(--box-shadow);
   font-family: var(--font-family);
+  color: var(--text-color);
   font-size: 0.9rem;
   border: none;
   transition: box-shadow 0.2s ease-out;
