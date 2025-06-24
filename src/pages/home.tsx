@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getData } from "../util/api";
 import "../styles/home.css";
 import { useNavigate } from "react-router-dom";
-import { Search } from "lucide-react";
+import { Search, SquareX } from "lucide-react";
 import Pagination from "../components/Pagination.js";
 import type { Country } from "../types/country";
 import LoadingCard from "../components/LoadingCard.js";
@@ -127,11 +127,13 @@ export default function Home() {
         </div>
         <div className="select-container">
           <select
+            id="region-select"
             value={selectedRegion}
             onChange={(e) => {
               setSelectedRegion(e.target.value);
               handleChange(e.target.value, "select");
             }}
+            aria-label="Filter by Region"
           >
             <option value="">Filter by Region</option>
             <option value="africa">Africa</option>
@@ -140,6 +142,19 @@ export default function Home() {
             <option value="europe">Europe</option>
             <option value="oceania">Oceania</option>
           </select>
+          {selectedRegion && (
+            <button
+              type="button"
+              className="clear-select-btn"
+              aria-label="Clear region filter"
+              onClick={() => {
+                setSelectedRegion("");
+                handleChange("", "select");
+              }}
+            >
+              <SquareX />
+            </button>
+          )}
         </div>
       </nav>
       <div className="countries-container">
@@ -152,6 +167,7 @@ export default function Home() {
                 key={index}
                 className="country-card"
                 onClick={() => handleClick(value)}
+                aria-label={`View details about ${value.name}`}
               >
                 <img src={value.flags.png} alt={value.name} />
                 <div className="card__texts">
