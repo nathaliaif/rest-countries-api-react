@@ -193,7 +193,7 @@ export default function Home() {
                     </li>
                     <li>
                       <span className="card__info-title">Capital: </span>
-                      {value.capital}
+                      {value.capital ?? "-"}
                     </li>
                   </ul>
                 </div>
