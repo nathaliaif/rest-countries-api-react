@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getData } from "../util/api";
 import "../styles/home.css";
 import { useNavigate } from "react-router-dom";
-import { Search, SquareX } from "lucide-react";
+import { Search, X } from "lucide-react";
 import Pagination from "../components/Pagination.js";
 import type { Country } from "../types/country";
 import LoadingCard from "../components/LoadingCard.js";
@@ -124,6 +124,16 @@ export default function Home() {
             onChange={(e) => handleChange(e.target.value)}
             value={inputSearch}
           />
+          {inputSearch && (
+            <button
+              type="button"
+              className="clear-btn"
+              aria-label="Clear input filter"
+              onClick={() => handleChange("")}
+            >
+              <X />
+            </button>
+          )}
         </div>
         <div className="select-container">
           <select
@@ -145,14 +155,14 @@ export default function Home() {
           {selectedRegion && (
             <button
               type="button"
-              className="clear-select-btn"
+              className="clear-btn clear-select-btn"
               aria-label="Clear region filter"
               onClick={() => {
                 setSelectedRegion("");
                 handleChange("", "select");
               }}
             >
-              <SquareX />
+              <X />
             </button>
           )}
         </div>
