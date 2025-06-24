@@ -5,6 +5,8 @@
   height: 400px;
   box-shadow: var(--box-shadow);
   background: var(--elements-color);
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .loading__image,
@@ -18,7 +20,7 @@
 }
 
 .loading__image {
-  height: 180px;
+  height: 10rem;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
@@ -42,5 +44,8 @@
   }
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 600px) {
+  .loading-card {
+    justify-self: center;
+  }
 }
