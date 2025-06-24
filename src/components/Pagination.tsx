@@ -91,6 +91,7 @@ const Pagination = ({
             id="arrow-start"
             onClick={(e) => handleArrowClick(e.currentTarget.id)}
             className="pagination__arrows"
+            aria-label="first page"
           >
             <ChevronsLeft />
           </button>
@@ -100,6 +101,7 @@ const Pagination = ({
             id="arrow-back"
             onClick={(e) => handleArrowClick(e.currentTarget.id)}
             className="pagination__arrows"
+            aria-label="previous page"
           >
             <ChevronLeft />
           </button>
@@ -137,6 +139,7 @@ const Pagination = ({
             id="arrow-next"
             onClick={(e) => handleArrowClick(e.currentTarget.id)}
             className="pagination__arrows"
+            aria-label="next page"
           >
             <ChevronRight />
           </button>
@@ -146,6 +149,7 @@ const Pagination = ({
             id="arrow-end"
             onClick={(e) => handleArrowClick(e.currentTarget.id)}
             className="pagination__arrows"
+            aria-label="last page"
           >
             <ChevronsRight />
           </button>
