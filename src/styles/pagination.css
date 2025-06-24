@@ -6,7 +6,8 @@
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2rem;
-  background: transparent;
+  background: var(--bg-color);
+  box-shadow: var(--box-shadow);
   border-radius: 40px;
 }
 

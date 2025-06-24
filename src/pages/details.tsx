@@ -82,7 +82,7 @@ export default function Details() {
               </li>
               <li className="info__text">
                 <span className="info__title">Capital: </span>
-                {country.capital ? country.capital : ""}
+                {country.capital ? country.capital : "-"}
               </li>
             </ul>
             <ul className="info-text-container">
@@ -103,20 +103,22 @@ export default function Details() {
           <div className="info-text-container">
             <h3 className="info__title-border-countries">Border Countries:</h3>
             <ul className="border-countries-container">
-              {borderCountries.map((country, index) => {
-                return (
-                  <li key={index}>
-                    <button
-                      className="border-country-card"
-                      onClick={() => {
-                        navigate("/details", { state: country });
-                      }}
-                    >
-                      {country.name}
-                    </button>
-                  </li>
-                );
-              })}
+              {borderCountries.length === 0
+                ? "None"
+                : borderCountries.map((country, index) => {
+                    return (
+                      <li key={index}>
+                        <button
+                          className="border-country-card"
+                          onClick={() => {
+                            navigate("/details", { state: country });
+                          }}
+                        >
+                          {country.name}
+                        </button>
+                      </li>
+                    );
+                  })}
             </ul>
           </div>
         </div>

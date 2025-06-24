@@ -1,4 +1,4 @@
-nav {
+.header-container {
   width: 100%;
   display: flex;
   align-items: center;
@@ -13,11 +13,11 @@ nav {
   -moz-box-shadow: var(--box-shadow);
 }
 
-.nav-title:hover {
+.header__title:hover {
   cursor: pointer;
 }
 
-.nav-title {
+.header__title {
   font-size: 1rem;
 }
 
@@ -49,17 +49,17 @@ body.dark-theme .moon-icon {
 }
 
 @media screen and (min-width: 600px) {
-  .nav-title {
+  .header__title {
     font-size: 1.3rem;
   }
 }
 
 @media screen and (min-width: 1440px) {
-  nav {
+  .header-container {
     padding: 2rem 4rem;
   }
 
-  .nav-title {
+  .header__title {
     font-size: 1.5rem;
   }
 

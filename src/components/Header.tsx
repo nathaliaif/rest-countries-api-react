@@ -14,8 +14,8 @@ export default function Header() {
 
   return (
     <>
-      <nav>
-        <h1 className="nav-title" onClick={() => navigate("/")}>
+      <nav className="header-container">
+        <h1 className="header__title" onClick={() => navigate("/")}>
           <span>Where</span> in the world?
         </h1>
         <button className="toggle-container" onClick={handleClick}>
