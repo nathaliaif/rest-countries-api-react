@@ -181,7 +181,7 @@ export default function Home() {
               >
                 <img src={value.flags.png} alt={value.name} />
                 <div className="card__texts">
-                  <h3 className="card__title">{value.name}</h3>
+                  <h2 className="card__title">{value.name}</h2>
                   <ul className="card__infos">
                     <li>
                       <span className="card__info-title">Population: </span>
