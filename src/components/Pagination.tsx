@@ -163,7 +163,7 @@ const Pagination = ({
         </li>
       </ul>
       <div className="pagination__caption">
-        Showing {currentPage} of {totalPages} pages
+        Showing {currentPage} of {totalPages != 0 ? totalPages : 1} pages
       </div>
     </nav>
   );
