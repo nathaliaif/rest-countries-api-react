@@ -26,9 +26,15 @@ const Pagination = ({
   const [pagesAhead, setPagesAhead] = useState(0);
   const [pagesBefore, setPagesBefore] = useState(0);
   const [totalPagesShown, setTotalPagesShown] = useState(7);
+  const [totalPages, setTotalPages] = useState(0);
+
+  useEffect(() => {
+    const pages = Math.ceil(totalItems / itemsPerPage);
+    setTotalPages(pages);
+  }, [totalItems, itemsPerPage]);
 
   // Get the total amount of pages necessary
-  for (let i: number = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
+  for (let i: number = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
 
@@ -79,7 +85,8 @@ const Pagination = ({
 
     // Logic for arrow end
     if (id === "arrow-end") {
-      onPageChange(pageNumbers[pageNumbers.length - 1]);
+      setTotalPages(pageNumbers[pageNumbers.length - 1]);
+      onPageChange(totalPages);
     }
   }
 
@@ -155,6 +162,9 @@ const Pagination = ({
           </button>
         </li>
       </ul>
+      <div className="pagination__caption">
+        Showing {currentPage} of {totalPages} pages
+      </div>
     </nav>
   );
 };
