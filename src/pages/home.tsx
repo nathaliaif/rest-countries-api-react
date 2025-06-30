@@ -6,7 +6,7 @@ import { Search, X } from "lucide-react";
 import Pagination from "../components/Pagination.js";
 import type { Country } from "../types/country";
 import LoadingCard from "../components/LoadingCard.js";
-import { useInfo } from "../context/InfoContext.js";
+import { useNavigationHistory } from "../context/NavigationHistoryContext.js";
 
 export default function Home() {
   const [display, setDisplay] = useState<Country[]>([]);
@@ -14,7 +14,7 @@ export default function Home() {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [inputSearch, setInputSearch] = useState("");
   const [loading, setLoading] = useState(false);
-  const { info, setInfo } = useInfo();
+  const { navigationHistory, setNavigationHistory } = useNavigationHistory();
 
   // Pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,14 +34,17 @@ export default function Home() {
       const data = await getData();
       setTotalCountries(data);
 
-      if (info.filter.length === 0) {
-        setInfo((prev) => ({ ...prev, filter: data }));
-        handlePageChange(info.currentPage, data);
+      if (navigationHistory.filter.length === 0) {
+        setNavigationHistory((prev) => ({ ...prev, filter: data }));
+        handlePageChange(navigationHistory.currentPage, data);
       } else {
         // If user used any kind of filters, returns where it was before clicking in a country
-        handlePageChange(info.currentPage, info.filter);
-        setSelectedRegion(info.select);
-        setInputSearch(info.input);
+        handlePageChange(
+          navigationHistory.currentPage,
+          navigationHistory.filter
+        );
+        setSelectedRegion(navigationHistory.select);
+        setInputSearch(navigationHistory.input);
       }
 
       // Loading animation
@@ -62,14 +65,14 @@ export default function Home() {
   function handleChange(value: string, type?: string): void {
     if (type === "select") {
       // Logic for select filter
-      info.filter = totalCountries.filter((item) =>
+      navigationHistory.filter = totalCountries.filter((item) =>
         item.region.toLowerCase().includes(value)
       );
       setSelectedRegion(value);
       setInputSearch("");
 
-      // Adds the selected Region to InfoContext
-      setInfo((prev) => ({
+      // Adds the selected Region to NavigationHistoryContext
+      setNavigationHistory((prev) => ({
         ...prev,
         input: "",
         select: value,
@@ -78,26 +81,29 @@ export default function Home() {
       // Logic for input filter
       setSelectedRegion("");
       setInputSearch(value);
-      info.filter =
+      navigationHistory.filter =
         value === ""
           ? totalCountries
           : totalCountries.filter((item) =>
               item.name.toLowerCase().includes(value.toLowerCase())
             );
 
-      // Adds the text being typed in the input to InfoContext
-      setInfo((prev) => ({
+      // Adds the text being typed in the input to NavigationHistoryContext
+      setNavigationHistory((prev) => ({
         ...prev,
         input: value,
         select: "",
       }));
     }
 
-    handlePageChange(1, info.filter); // reset to page 1 and paginate new filtered data
+    handlePageChange(1, navigationHistory.filter); // reset to page 1 and paginate new filtered data
   }
 
   // Pagination
-  function handlePageChange(pageNumber: number, data = info.filter) {
+  function handlePageChange(
+    pageNumber: number,
+    data = navigationHistory.filter
+  ) {
     const indexOfLastItem = pageNumber * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentSlice = data.slice(indexOfFirstItem, indexOfLastItem);
@@ -105,7 +111,7 @@ export default function Home() {
     setDisplay(currentSlice);
     setCurrentPage(pageNumber);
 
-    setInfo((prev) => ({
+    setNavigationHistory((prev) => ({
       ...prev,
       filter: data,
       currentPage: pageNumber,
@@ -202,7 +208,7 @@ export default function Home() {
       </div>
       <Pagination
         itemsPerPage={itemsPerPage}
-        totalItems={info.filter.length}
+        totalItems={navigationHistory.filter.length}
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />
