@@ -2,13 +2,13 @@ import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import Details from "./pages/details";
 import Layout from "./Layout";
-import { InfoProvider } from "./context/InfoContext";
+import { NavigationHistoryProvider } from "./context/NavigationHistoryContext";
 import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   return (
     <>
-      <InfoProvider>
+      <NavigationHistoryProvider>
         <ThemeProvider>
           <Router>
             <Routes>
@@ -19,7 +19,7 @@ function App() {
             </Routes>
           </Router>
         </ThemeProvider>
-      </InfoProvider>
+      </NavigationHistoryProvider>
     </>
   );
 }
